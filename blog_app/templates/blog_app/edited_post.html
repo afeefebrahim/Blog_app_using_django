@@ -1,0 +1,44 @@
+
+      {% extends 'blog_app/base.html' %}
+      {% load staticfiles %}
+      {% block body_block %}
+      <div class="hero-unit">
+      <h1>EDIT</h1>
+      <div class="container"> 
+        <br></br>
+      <form form class="span6" id=edit_form>
+        {%csrf_token%}
+      <input type = "text" id = "head" value="{{blog_p.heading}}"><br></br>
+      <textarea id ="post"  rows="16" cols="250"  name="comment" form="usrform" value = "{{blog_p.text}}" ></textarea>
+        <br />
+    	<!--<input type = "text" id = "textmsg" value = "{{blog_p.text}}"><br></br>-->
+      <input type="submit" value = "SAVE" id = "edit()">
+    </form>
+     
+      <script>
+      $(document).on('submit','#edit_form',function(e){
+        var heading = $('#head').val()
+        var post_msg = $('#textmsg').val()
+        var new_slug = '{{blog_p.slug}}'
+        console.log(heading)
+        console.log(post_msg)
+        console.log(new_slug)
+        var new_url = ""
+        //e.preventDefault();
+        $.ajax({
+         type:"POST",
+         async:false,
+         url:new_url,
+         dataType: "json",
+         data:{ head:heading ,
+               post_msg:post_msg,
+               csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val()},
+         success: function(data){
+          location.href = "/blog_app/";
+         }
+        });
+        
+      });
+      </script>  
+      {% endblock %}     
+      

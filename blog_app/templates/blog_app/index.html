@@ -1,0 +1,31 @@
+<!--<html>
+    <head>
+        <title>blog_app</title>
+    </head>
+    <body>-->
+        {% extends "blog_app/base.html" %}
+        {% block title %}Welcome to MY BLOG!{% endblock %}
+        {% block body_block %}
+        <h1> MY BLOG</h1>
+        
+         {%if post%}        
+       
+       
+       {%for posts in post%}
+       <div class="hero-unit">
+       <!-- <div class="container">--> 
+         <a href="/blog_app/blog_post/{{ posts.slug }}">{{posts}}<br></br>
+           
+         </div>   
+    {%endfor%}
+    {%else%}
+       <strong>There are no categories present.</strong>
+    {%endif%} 
+     
+    {% endblock %}
+     
+     
+    <!--</body>
+    </head>
+</html>-->             
+

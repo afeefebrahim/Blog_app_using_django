@@ -1,0 +1,28 @@
+<!--<!DOCTYPE html>
+<html>
+    <head>
+        <title>blog_app</title>
+    </head>
+    <body>-->
+      {% extends "blog_app/base.html" %}
+{% block title %}Login Here{% endblock %}
+{% block body_block %}
+ <div class="hero-unit">
+    {%if post%}
+    <div class="container"> 
+            
+       <table border = 1>
+       {%for posts in post%}
+       <tr>
+       <td><h3>{{posts}}</h3></td>     
+        <td width = 150> <a href="/blog_app/edit/{{ posts.slug }}">   edit  </td>
+       <td width = 150> <a href="/blog_app/delete/{{posts.slug}}">   delete   </td>
+       </tr>
+       {%endfor%}
+     </table>
+    {%else%}
+       <strong>There are no categories present.</strong>
+    {%endif%} 
+     </div> 
+    </div>  
+    {% endblock %}

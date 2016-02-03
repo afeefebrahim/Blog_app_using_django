@@ -1,0 +1,15 @@
+{% extends "blog_app/base.html" %}
+{% block title %}Login Here{% endblock %}
+{% block body_block %}
+<div class="hero-unit"> 
+    <h1>ADD NEW POST</h1>
+    <div class="container"> 
+            <br></br>
+    	<form form class="span6" method = 'POST' action = "">
+        {% csrf_token %}
+        <h3>USER :{{user.username}}</h3><br></br>
+        {{form.as_p}}
+    	
+           <input class="btn btn-primary" type="submit" name="POST" value="post" />
+    	</form>
+    {% endblock %}

@@ -1,0 +1,64 @@
+
+
+      {% extends "blog_app/base.html" %}
+      {% load staticfiles %}
+      
+      {% block body_block %}
+      <div class="hero-unit">
+      <h1>{{heading}}</h1><br></br>
+       <h4>{{text}}</h4><br></br>
+       
+       <div class="container"> 
+        <br></br> 
+      {%if commends%}
+        {%for commend in commends%}
+           <li>{{commend.comment}}</li>
+        {% endfor %}
+        {% endif %}
+       <form form class="span6" id="add_form" >
+        {% csrf_token %}
+        <label>comment : </label>
+        <input type = "text" id = "comment" placeholder="comment....">
+        <input  class="btn btn-primary" type="submit" value = "SUBMIT">        
+       <!--{% csrf_token %}
+       {{form.as_p}}-->
+     </form>
+   
+      <!-- <script src="http://code.jquery.com/jquery-1.11.1.js"></script>-->
+       
+      <script>
+          $(document).on('submit','#add_form',function(e){
+            var x = "{{user.username}}";
+            console.log(x)
+            var new_slug = "{{blog_p.slug}}";
+            console.log(new_slug)
+            var new_url = '/blog_app/blog_post/'+new_slug+'/';
+            console.log(new_url)
+           // e.preventDefault();
+            $.ajax({
+              type:"POST",
+              async:false,
+              url:new_url,
+              data:{
+                comment:x+":"+$('#comment').val(),
+                csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+              },
+            success:function(data){
+              data = JSON.parse(data);
+              var list=data.json;
+              console.log(list) 
+              var y = document.createElement('LI');
+              var t = document.createTextNode(list[list.length-1])
+              y.appendChild(t);
+              document.getElementById('list').appendChild(y)
+              document.getElementById('comment').value ="";
+            }
+            
+            });
+          });
+
+      </script> 
+      </div> 
+    </div>
+{% endblock %}
+ 
